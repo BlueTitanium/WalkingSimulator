@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int moveSpeed = 500; // how fast the player moves
+    public int moveSpeed = 5; // how fast the player moves
     public float lookSpeedX = 6; // left/right mouse sensitivity
     public float lookSpeedY = 3; // up/down mouse sensitivity
     int jumpForce = 50; // ammount of force applied to create a jump
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
         if (grounded && Input.GetButtonDown("Jump")) //if the player is on the ground and press Spacebar
         {
-            _rigidbody.AddForce(new Vector3(0, jumpForce, 0)); // Add a force jumpForce in the Y direction
+            _rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse); // Add a force jumpForce in the Y direction
         }
     }
 }
