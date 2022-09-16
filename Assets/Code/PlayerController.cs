@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     public int moveSpeed = 5; // how fast the player moves
     public float lookSpeedX = 6; // left/right mouse sensitivity
     public float lookSpeedY = 3; // up/down mouse sensitivity
-    int jumpForce = 50; // ammount of force applied to create a jump
+    int jumpForce = 10; // ammount of force applied to create a jump
 
     public Transform camTrans; // a reference to the camera transform
     float xRotation;
