@@ -73,6 +73,7 @@ public class CustomPlayerController : MonoBehaviour
     public GameObject damageFlash;
     public bool paused = false;
 
+
     void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
