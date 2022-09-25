@@ -28,10 +28,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
+        if(pauseMenu != null)
+            pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
-        DeathScreen.SetActive(false);
-        player.paused = false;
+        if(DeathScreen != null)
+            DeathScreen.SetActive(false);
+        if(player != null)
+            player.paused = false;
         Time.timeScale = 1f;
         GameObject[] ams = GameObject.FindGameObjectsWithTag("Music");
         StartCoroutine(LoadOptions());
