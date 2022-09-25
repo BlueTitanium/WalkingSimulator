@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     float maxHP = 10f;
     public float HP = 10f;
     public Image HPBar;
+    public GameObject particles;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
         if(HP < 0)
         {
             Destroy(gameObject);
+            Instantiate(particles, this.transform.position, particles.transform.rotation);
         }
     }
 }
