@@ -37,6 +37,10 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             print("Hit!");
         }
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator Die()

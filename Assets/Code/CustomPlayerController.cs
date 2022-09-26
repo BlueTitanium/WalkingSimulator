@@ -9,11 +9,12 @@ public class CustomPlayerController : MonoBehaviour
     public float playerHP = 100f;
     float maxHp = 100f;
     public int moveSpeed = 5; // how fast the player moves
-    public float lookSpeedX = 6; // left/right mouse sensitivity
-    public float lookSpeedY = 3; // up/down mouse sensitivity
+    public float lookSpeedX = 1; // left/right mouse sensitivity
+    public float lookSpeedY = 1; // up/down mouse sensitivity
     public float jumpForce = 10; // ammount of force applied to create a jump
     Rigidbody _rigidbody;
     public Image healthBar;
+    public GameManager gm;
 
     [Header("Camera")]
     public Transform camTrans; // a reference to the camera transform
@@ -70,6 +71,8 @@ public class CustomPlayerController : MonoBehaviour
     public float slowMoAmount = .5f;
     public float curTimeflow;
     public GameObject damageFlash;
+    public bool paused = false;
+
 
     void Start()
     {
@@ -84,6 +87,10 @@ public class CustomPlayerController : MonoBehaviour
         speedLines.SetActive(false);
         curTimeflow = slowMoMaxLength;
         maxHp = playerHP;
+        if (gm == null)
+        {
+            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
     }
 
     void FixedUpdate()
@@ -178,6 +185,7 @@ public class CustomPlayerController : MonoBehaviour
             zipping = true;
             numConsecutiveJumps += 1;
             curDirection = ray.direction;
+            zipTimeLeft = zipCD;
         }
     }
 
@@ -216,93 +224,99 @@ public class CustomPlayerController : MonoBehaviour
         if (playerHP < 0)
         {
             //do something;
+            gm.ShowDeathScreen();
         }
     }
 
     void Update()
     {
-        //switched the mouse inputs
-        yRotation += Input.GetAxis("Mouse X") * lookSpeedX;
-        xRotation -= Input.GetAxis("Mouse Y") * lookSpeedY; //inverted
-        xRotation = Mathf.Clamp(xRotation, -90, 90); //Keeps up/down head rotation realistic
-        camTrans.localEulerAngles = new Vector3(xRotation, 0, 0);
-        transform.eulerAngles = new Vector3(0, yRotation, 0);
+        if (!paused)
+        {
+            //switched the mouse inputs
+            yRotation += Input.GetAxis("Mouse X") * lookSpeedX;
+            xRotation -= Input.GetAxis("Mouse Y") * lookSpeedY; //inverted
+            xRotation = Mathf.Clamp(xRotation, -90, 90); //Keeps up/down head rotation realistic
+            camTrans.localEulerAngles = new Vector3(xRotation, 0, 0);
+            transform.eulerAngles = new Vector3(0, yRotation, 0);
 
-        if ((grounded || zipping) && Input.GetButtonDown("Jump")) //if the player is on the ground and press Spacebar
-        {
-            consecTimer = 0f;
-            numConsecutiveJumps++;
-            jumpTime = Time.time;
-            _rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.VelocityChange); // Add a force jumpForce in the Y direction
-            zipping = false;
-        }
-        if (onWall && Input.GetButtonDown("Jump"))
-        {
-            consecTimer = 0f;
-            numConsecutiveJumps++;
-            jumpTime = Time.time;
-            onWall = false;
-            wallJumped = true;
-            Vector3 direction = wall.transform.up;
-            direction.Normalize();
-            _rigidbody.AddForce(new Vector3(direction.x * jumpForce, jumpForce * 1.5f, direction.z * jumpForce), ForceMode.VelocityChange);
-            zipping = false;
-        }
+            if ((grounded || zipping) && Input.GetButtonDown("Jump")) //if the player is on the ground and press Spacebar
+            {
+                consecTimer = 0f;
+                numConsecutiveJumps++;
+                jumpTime = Time.time;
+                _rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.VelocityChange); // Add a force jumpForce in the Y direction
+                zipping = false;
+            }
+            if (onWall && Input.GetButtonDown("Jump"))
+            {
+                consecTimer = 0f;
+                numConsecutiveJumps++;
+                jumpTime = Time.time;
+                onWall = false;
+                wallJumped = true;
+                Vector3 direction = wall.transform.up;
+                direction.Normalize();
+                _rigidbody.AddForce(new Vector3(direction.x * jumpForce, jumpForce * 1.5f, direction.z * jumpForce), ForceMode.VelocityChange);
+                zipping = false;
+            }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            SwingSword();
-        }
-        if (sword.isPlaying)
-        {
-            hitbox.SetActive(true);
-        } else
-        {
-            hitbox.SetActive(false);
-        }
-        if (Input.GetButtonDown("Fire2") && zipTimeLeft <= 0f)
-        {
-            FireRay();
-            zipTimeLeft = zipCD;
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SwingSword();
+            }
+            if (sword.isPlaying)
+            {
+                hitbox.SetActive(true);
+            } else
+            {
+                hitbox.SetActive(false);
+            }
+            if (Input.GetButtonDown("Fire2") && zipTimeLeft <= 0f)
+            {
+                FireRay();
+            }
 
-        ray1 = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-        RaycastHit hit;
-        bool zipAvailable = Physics.Raycast(ray1, out hit, maxRayDistance);
-        if (zipAvailable && zipTimeLeft <= 0f)
-        {
-            crosshair.color = Color.red;
-        } else if (zipAvailable)
-        {
-            crosshair.color = Color.gray;
-        }
+            ray1 = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+            RaycastHit hit;
+            bool zipAvailable = Physics.Raycast(ray1, out hit, maxRayDistance);
+            if (zipAvailable && zipTimeLeft <= 0f)
+            {
+                crosshair.color = Color.red;
+            } else if (zipAvailable)
+            {
+                crosshair.color = Color.gray;
+            }
+            else
+            {
+                crosshair.color = Color.black;
+            }
+            //zipcd
+            if(zipTimeLeft > 0)
+            {
+                zipTimeLeft -= Time.deltaTime;
+            }
+            //screenshake
+            if (shakeDuration > 0)
+            {
+                camTrans.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+
+                shakeDuration -= Time.deltaTime;
+            }
+            else
+            {
+                shakeDuration = 0f;
+                camTrans.localPosition = initialPosition;
+                damageFlash.SetActive(false);
+            }
+            Time.timeScale = Mathf.Lerp(slowMoAmount, 1f, curTimeflow / slowMoMaxLength);
+            if (curTimeflow < slowMoMaxLength)
+            {
+                curTimeflow += Time.deltaTime;
+            }
+        } 
         else
         {
-            crosshair.color = Color.black;
-        }
-        //zipcd
-        if(zipTimeLeft > 0)
-        {
-            zipTimeLeft -= Time.deltaTime;
-        }
-        //screenshake
-        if (shakeDuration > 0)
-        {
-            camTrans.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
-
-            shakeDuration -= Time.deltaTime;
-        }
-        else
-        {
-            shakeDuration = 0f;
-            camTrans.localPosition = initialPosition;
-            damageFlash.SetActive(false);
-        }
-        //slowmo
-        Time.timeScale = Mathf.Lerp(slowMoAmount, 1f, curTimeflow / slowMoMaxLength);
-        if(curTimeflow < slowMoMaxLength)
-        {
-            curTimeflow += Time.deltaTime;
+            Time.timeScale = 0;
         }
     } 
     private void OnCollisionEnter(Collision collision)

@@ -5,6 +5,9 @@ using UnityEngine;
 public class SwordHitbox : MonoBehaviour
 {
     public CustomPlayerController player;
+    public ParticleSystem swordStrike;
+    public ParticleSystem environStrike;
+
     //on trigger enter
     //if enemy 
     //deal damage
@@ -28,16 +31,20 @@ public class SwordHitbox : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(player.damage);
+            swordStrike.transform.position = other.gameObject.transform.position;
+            swordStrike.Play();
             player.shakeDuration = .1f;
             player.shakeMagnitude = .2f;
             player.curTimeflow = 0f;
             player.zipTimeLeft = 0f;
-        }
+        } else
         if (other.gameObject.CompareTag("EnemyProjectile"))
         {
             if(other.gameObject.GetComponent<Projectile>().counterSpawned == false)
             {
                 player.SpawnProjectile(other.gameObject.transform.position);
+                swordStrike.transform.position = other.gameObject.transform.position;
+                swordStrike.Play();
                 player.curTimeflow = 0f;
                 player.shakeDuration = .1f;
                 player.shakeMagnitude = .2f;
@@ -45,6 +52,10 @@ public class SwordHitbox : MonoBehaviour
                 other.gameObject.GetComponent<Projectile>().counterSpawned = true;
             }
             Destroy(other.gameObject);
+        } else
+        {
+            environStrike.transform.position = transform.position;
+            environStrike.Play();
         }
     }
 }
