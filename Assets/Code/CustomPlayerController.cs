@@ -5,7 +5,15 @@ using UnityEngine.UI;
 
 public class CustomPlayerController : MonoBehaviour
 {
-    [Header("Standard Player Settings")]
+    public AudioClip sword_sound;
+    public AudioSource sword_audio;
+    public AudioClip jump_sound;
+    public AudioSource jump_audio;
+    public AudioClip zip_sound;
+    public AudioSource zip_audio;
+    public Sound slowmo_sound;
+    public AudioSource slowmo_audio;
+    [Header("Standard Player Settings")]    
     public float playerHP = 100f;
     float maxHp = 100f;
     public int moveSpeed = 5; // how fast the player moves
@@ -192,12 +200,14 @@ public class CustomPlayerController : MonoBehaviour
     void SwingSword()
     {
         print(swordAnim);
+
         switch (swordAnim){
             case 0:
                 sword.Play("SwordSwing3");
                 swordAnim = 1;
                 break;
             case 1:
+                
                 sword.Play("SwordSwing2");
                 swordAnim = 0;
                 break;
@@ -210,7 +220,9 @@ public class CustomPlayerController : MonoBehaviour
 
     public void SpawnProjectile(Vector3 pos)
     {
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().Play(slowmo_sound, slowmo_audio);
         GameObject b = Instantiate(playerProjectile, pos, Camera.main.transform.rotation);
+
     }
 
     public void TakeDamage(float damage)
@@ -241,6 +253,7 @@ public class CustomPlayerController : MonoBehaviour
 
             if ((grounded || zipping) && Input.GetButtonDown("Jump")) //if the player is on the ground and press Spacebar
             {
+                GetComponent<AudioSource>().PlayOneShot(jump_sound);
                 consecTimer = 0f;
                 numConsecutiveJumps++;
                 jumpTime = Time.time;
@@ -262,6 +275,7 @@ public class CustomPlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
+                GetComponent<AudioSource>().PlayOneShot(sword_sound);
                 SwingSword();
             }
             if (sword.isPlaying)
@@ -273,6 +287,7 @@ public class CustomPlayerController : MonoBehaviour
             }
             if (Input.GetButtonDown("Fire2") && zipTimeLeft <= 0f)
             {
+                GetComponent<AudioSource>().PlayOneShot(zip_sound);
                 FireRay();
             }
 

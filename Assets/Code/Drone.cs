@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Drone : MonoBehaviour
 {
+    public AudioClip laser_sound;
+    public AudioSource laser_audio;
     public GameObject target;
     public GameObject projectile;
     public LayerMask player;
@@ -41,6 +43,7 @@ public class Drone : MonoBehaviour
     public void SpawnProjectile()
     {
         GameObject b = Instantiate(projectile, transform.position, transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(laser_sound);
     }
 
     private void OnTriggerEnter(Collider other)
