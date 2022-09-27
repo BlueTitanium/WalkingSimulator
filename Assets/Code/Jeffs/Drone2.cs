@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Drone2 : MonoBehaviour
+{
+    public AudioClip laser_sound;
+    public AudioSource laser_audio;
+    public GameObject projectile;
+    public GameObject target;
+    public LayerMask player;
+    public float sphere = 20f;
+    float timeLeft = 0f;
+    public float shootCD = 1f; 
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+            if(timeLeft <= 0)
+            {
+                SpawnProjectile();
+                timeLeft += shootCD;
+            }
+        Collider[] colliders = Physics.OverlapSphere(transform.position, sphere, player);
+        if (colliders.Length > 0) {
+            target = Camera.main.gameObject;
+        }
+    }
+
+    public void SpawnProjectile()
+    {
+        GameObject b = Instantiate(projectile, transform.position, transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(laser_sound);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            target = other.gameObject;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            target = null;
+        }
+    }
+}
