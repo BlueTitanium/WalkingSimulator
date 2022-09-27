@@ -10,6 +10,9 @@ TagManager:
   - EnemyProjectile
   - PlayerProjectile
   - Music
+  - Boss
+  - BossSword
+  - BossAttack
   layers:
   - Default
   - TransparentFX

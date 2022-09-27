@@ -186,7 +186,7 @@ public class CustomPlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, maxRayDistance))
         {
             Debug.Log(hit.transform.name + "Found!");
-            
+            GetComponent<AudioSource>().PlayOneShot(zip_sound);
             lineRenderer.SetPosition(0, ray.origin);
             lineRenderer.SetPosition(1, hit.point);
             endPoint = hit.point;
@@ -200,7 +200,10 @@ public class CustomPlayerController : MonoBehaviour
     void SwingSword()
     {
         print(swordAnim);
-
+        if (!sword.isPlaying)
+        {
+            GetComponent<AudioSource>().PlayOneShot(sword_sound);
+        }
         switch (swordAnim){
             case 0:
                 sword.Play("SwordSwing3");
@@ -233,10 +236,19 @@ public class CustomPlayerController : MonoBehaviour
         numConsecutiveJumps = 0;
         zipping = false;
         damageFlash.SetActive(true);
-        if (playerHP < 0)
+        if (playerHP <= 0)
         {
             //do something;
             gm.ShowDeathScreen();
+        }
+        
+    }
+    public void Heal(float amount)
+    {
+        playerHP += amount;
+        if (playerHP >= maxHp)
+        {
+            playerHP = maxHp;
         }
     }
 
@@ -275,7 +287,7 @@ public class CustomPlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                GetComponent<AudioSource>().PlayOneShot(sword_sound);
+                
                 SwingSword();
             }
             if (sword.isPlaying)
@@ -287,7 +299,7 @@ public class CustomPlayerController : MonoBehaviour
             }
             if (Input.GetButtonDown("Fire2") && zipTimeLeft <= 0f)
             {
-                GetComponent<AudioSource>().PlayOneShot(zip_sound);
+                
                 FireRay();
             }
 
@@ -333,7 +345,16 @@ public class CustomPlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-    } 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("BossSword") || other.gameObject.CompareTag("BossAttack"))
+        {
+            TakeDamage(10f);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         zipping = false;
