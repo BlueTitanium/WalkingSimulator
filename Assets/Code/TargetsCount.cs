@@ -35,6 +35,9 @@ public class TargetsCount : MonoBehaviour
     {
         if(targetList.Contains(TargetHit.TargetType.bottomLeft) && targetList.Contains(TargetHit.TargetType.upperLeft) && targetList.Contains(TargetHit.TargetType.bottomRight) && targetList.Contains(TargetHit.TargetType.upperRight)) {
             doorUnlocked = true;
+            GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
+            
         }
     }
 }
