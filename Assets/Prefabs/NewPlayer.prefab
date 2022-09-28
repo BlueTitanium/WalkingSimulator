@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 4396762231725477123}
   - component: {fileID: 4396762231725477120}
   - component: {fileID: 4396762231725477121}
+  - component: {fileID: 9088627679156049404}
   - component: {fileID: 8271538645414301898}
   - component: {fileID: 2168151207897493526}
   m_Layer: 3
@@ -183,7 +184,8 @@ MonoBehaviour:
   sword: {fileID: 7280302138055151390}
   hitbox: {fileID: 7280302138832083657}
   damage: 5
-  playerProjectile: {fileID: 6791384380100584736, guid: 8fa071c89538d1e43ba29a1f0256c120, type: 3}
+  playerProjectile: {fileID: 6791384380100584736, guid: 8fa071c89538d1e43ba29a1f0256c120,
+    type: 3}
   shakeDuration: 0
   initialPosition: {x: 0, y: 0.827, z: 0}
   shakeMagnitude: 0.5
@@ -275,6 +277,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &9088627679156049404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396762231725477126}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba662b9d45ea4238a96f8f677932c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &8271538645414301898
 AudioSource:
   m_ObjectHideFlags: 0
@@ -380,7 +394,8 @@ AudioSource:
   m_GameObject: {fileID: 4396762231725477126}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2703782791308576064, guid: c54e5c4fa005ccd41bd1874dad5ac6bb, type: 2}
+  OutputAudioMixerGroup: {fileID: -2703782791308576064, guid: c54e5c4fa005ccd41bd1874dad5ac6bb,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
