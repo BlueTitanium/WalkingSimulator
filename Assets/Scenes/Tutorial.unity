@@ -540,6 +540,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66d0b7696e9b40e40ae682443f77a073, type: 3}
+--- !u!1 &360785755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726031963810782784, guid: 49bcd85f0c2eac2489dca8770a5d7f49, type: 3}
+  m_PrefabInstance: {fileID: 877086856}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &360785760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360785755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b551a522f89714d958f2246d07847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &571340550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -616,6 +633,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1076003753528924543, guid: 5b96d84874659304b863cc497c95d9e8, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -2703782791308576064, guid: c54e5c4fa005ccd41bd1874dad5ac6bb, type: 2}
+    - target: {fileID: 1076003753528924543, guid: 5b96d84874659304b863cc497c95d9e8, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.829
+      objectReference: {fileID: 0}
     - target: {fileID: 3914489464136329436, guid: 5b96d84874659304b863cc497c95d9e8, type: 3}
       propertyPath: m_Name
       value: ED2
@@ -988,6 +1013,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6983245578989098436, guid: f1aee4b0373fe1248bb88533840c43ea, type: 3}
+      propertyPath: levelName
+      value: Level1
+      objectReference: {fileID: 0}
     - target: {fileID: 7011934982557023883, guid: f1aee4b0373fe1248bb88533840c43ea, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1304,6 +1333,10 @@ PrefabInstance:
     - target: {fileID: 2414563994689608249, guid: b94b467b0c67caa489fdf1c1fe841d8f, type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414563994689608249, guid: b94b467b0c67caa489fdf1c1fe841d8f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b94b467b0c67caa489fdf1c1fe841d8f, type: 3}

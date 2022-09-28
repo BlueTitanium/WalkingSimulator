@@ -340,6 +340,12 @@ public class CustomPlayerController : MonoBehaviour
             {
                 curTimeflow += Time.deltaTime;
             }
+
+            if(transform.position.y < -100f)
+            {
+                gm.RestartLevel();
+            }
+
         } 
         else
         {

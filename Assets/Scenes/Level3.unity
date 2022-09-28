@@ -345,7 +345,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6983245578989098436, guid: f1aee4b0373fe1248bb88533840c43ea, type: 3}
       propertyPath: levelName
-      value: Credit
+      value: BossLevel
       objectReference: {fileID: 0}
     - target: {fileID: 7011934982557023883, guid: f1aee4b0373fe1248bb88533840c43ea, type: 3}
       propertyPath: m_RootOrder
@@ -404,6 +404,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1386776387, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -519,6 +523,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d4e9e34f5e6b1344a2bf441b3a27ffc, type: 3}
+--- !u!1001 &339843467
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_RootOrder
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -361.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -330.132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924772, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924776, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_Name
+      value: Moving Plat (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612920262381924776, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1386776387, guid: 3095d70516955204794c7c4f28f57092, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3095d70516955204794c7c4f28f57092, type: 3}
 --- !u!1001 &348473307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1800,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7903022623552998633, guid: 4d4e9e34f5e6b1344a2bf441b3a27ffc, type: 3}
       propertyPath: shootCD
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7903022623552998635, guid: 4d4e9e34f5e6b1344a2bf441b3a27ffc, type: 3}
       propertyPath: HP
