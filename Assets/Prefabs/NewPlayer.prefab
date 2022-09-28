@@ -149,7 +149,7 @@ MonoBehaviour:
     audioType: 0
     source: {fileID: 0}
     clipName: 
-    audioClip: {fileID: 8300000, guid: 23434f37825fd234ba51db0c12e7f876, type: 3}
+    audioClip: {fileID: 8300000, guid: 30ed58805ba39c4439ef29a205cf0576, type: 3}
     isLoop: 0
     playOnAwake: 0
     volume: 0.5

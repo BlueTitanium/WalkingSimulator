@@ -16,22 +16,26 @@ public class Moving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print((transform.position.x, originalPos[0]));
     
-        if ((transform.position.x - originalPos[0]) < distance  && d == true){
     
+        if ((originalPos[0] + distance) >= transform.position.x){
+            
+            d = true;
+        }
+        else if ((originalPos[0]) >= transform.position.x){
+            
+            d = false;
+        } 
+        if (d == true){
             Vector3 pos = transform.position;
             pos.x += speed * Time.deltaTime;
             transform.position = pos;
         }
-        else 
-            d = false;
-        if (transform.position.x > originalPos[0] && d == false){
+        else{
             Vector3 pos = transform.position;
             pos.x -= speed * Time.deltaTime;
             transform.position = pos;
         }
-        else
-            d = true;
+            
     }
 }

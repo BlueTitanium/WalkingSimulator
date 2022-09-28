@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     public bool againstPlayer;
     public float speed = 10f;
     public float pushAmount = 10f;
-    public float timeToDie = 3f;
+    public float timeToDie = 8f;
     public float damage = 10f;
     public bool counterSpawned = false;
     public Rigidbody rb;
