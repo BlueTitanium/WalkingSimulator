@@ -37,6 +37,16 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             print("Hit!");
         }
+        if (collision.gameObject.CompareTag("Boss") && !againstPlayer)
+        {
+            var c = FindObjectOfType<BOSS3>();
+            if (c != null)
+            {
+                c.GetComponent<BOSS3>().TakeDamage(damage * 3);
+            }
+            Destroy(gameObject);
+            print("Hit!");
+        }
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
@@ -45,6 +55,7 @@ public class Projectile : MonoBehaviour
 
     IEnumerator Die()
     {
+        
         yield return new WaitForSeconds(timeToDie);
         Destroy(gameObject);
     }

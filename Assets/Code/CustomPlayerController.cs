@@ -351,7 +351,7 @@ public class CustomPlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BossSword") || other.gameObject.CompareTag("BossAttack"))
         {
-            TakeDamage(10f);
+            TakeDamage(5f);
         }
     }
 

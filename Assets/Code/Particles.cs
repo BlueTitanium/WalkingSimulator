@@ -10,6 +10,7 @@ public class Particles : MonoBehaviour
     void Start()
     {
         transform.localScale *= scale;
+        GetComponent<AudioSource>().Play();
         Destroy(gameObject, timeToDie);
     }
 

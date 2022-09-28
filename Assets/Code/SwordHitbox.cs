@@ -30,10 +30,15 @@ public class SwordHitbox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Boss"))
         {
-            var b = GameObject.Find("BOSS2");
+            var b = FindObjectOfType<BOSS2>();
             if (b!= null)
             {
                 b.GetComponent<BOSS2>().TakeDamage(player.damage);
+            }
+            var c = FindObjectOfType<BOSS3>();
+            if (c != null)
+            {
+                c.GetComponent<BOSS3>().TakeDamage(player.damage);
             }
             swordStrike.transform.position = other.gameObject.transform.position;
             swordStrike.Play();
@@ -45,7 +50,30 @@ public class SwordHitbox : MonoBehaviour
             player.zipTimeLeft = 0f;
             if (healOnKill)
             {
-                player.Heal(10f);
+                player.Heal(.5f);
+                if (c != null)
+                {
+                    player.Heal(2f);
+                }
+            }
+        }
+        if (other.gameObject.CompareTag("BossSword"))
+        {
+            var b = FindObjectOfType<BOSS2>();
+            if (b != null)
+            {
+                var bscript = b.GetComponent<BOSS2>();
+                bscript.TakeDamage(player.damage);
+                bscript.state = BOSS2.BossState.isStunned;
+                bscript.currentTimer = bscript.stunTime;
+            }
+            var c = FindObjectOfType<BOSS3>();
+            if (c != null)
+            {
+                var bscript = c.GetComponent<BOSS3>();
+                bscript.TakeDamage(player.damage);
+                bscript.state = BOSS3.BossState.isStunned;
+                bscript.currentTimer = bscript.stunTime;
             }
         }
         if (other.gameObject.CompareTag("Enemy"))
@@ -59,7 +87,7 @@ public class SwordHitbox : MonoBehaviour
             player.zipTimeLeft = 0f;
             if (healOnKill)
             {
-                player.Heal(1f);
+                player.Heal(3f);
             }
         } else
         if (other.gameObject.CompareTag("EnemyProjectile"))

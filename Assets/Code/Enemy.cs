@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour
         if(HP < 0)
         {
             Destroy(gameObject);
-            Instantiate(particles, this.transform.position, particles.transform.rotation);
+            var a = Instantiate(particles, this.transform.position, particles.transform.rotation);
+            a.GetComponent<AudioSource>().volume = .2f;
         }
     }
 }

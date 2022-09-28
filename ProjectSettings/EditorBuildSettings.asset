@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TaneimTesting.unity
     guid: d6550df111a56a3428e8db6534d3d0a7
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 5e803a5743f351046a750803660f2552
   m_configObjects: {}
