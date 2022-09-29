@@ -343,7 +343,7 @@ public class CustomPlayerController : MonoBehaviour
 
             if(transform.position.y < -100f)
             {
-                gm.RestartLevel();
+                TakeDamage(maxHp);
             }
 
         } 

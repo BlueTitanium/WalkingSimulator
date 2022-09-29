@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup musicMixerGroup;
     [SerializeField] private AudioMixerGroup soundEffectsMixerGroup;
     [SerializeField] private Sound[] sounds;
+    private String curSceneName = "";
 
     private void Awake()
     {
@@ -20,14 +21,7 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "TaneimTesting":
-                Play(sounds[0], source);
-                break;
-            default:
-                break;
-        }
+        
 
         musicMixerGroup.audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         soundEffectsMixerGroup.audioMixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
@@ -57,11 +51,52 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Instance == null)
+        String sceneName = SceneManager.GetActiveScene().name;
+        if(curSceneName != sceneName)
+        {
+            curSceneName = sceneName;
+            SwitchMusic();
+        }
+        if (Instance == null)
         {
             Instance = GameObject.Find("GameManager").GetComponent<GameManager>();
         }
     }
+
+    private void SwitchMusic()
+    { 
+        switch (curSceneName)
+        {
+            case "TaneimTesting":
+                Play(sounds[0], source);
+                break;
+            case "MainMenu":
+                Play(sounds[1], source);
+                break;
+            case "Tutorial":
+                Play(sounds[2], source);
+                break;
+            case "Level1":
+                Play(sounds[3], source);
+                break;
+            case "Level2":
+                Play(sounds[4], source);
+                break;
+            case "Level3":
+                Play(sounds[5], source);
+                break;
+            case "BossLevel":
+                Play(sounds[6], source);
+                break;
+            case "Credits":
+                Play(sounds[7], source);
+                break;
+            default:
+                source.Stop();
+                break;
+        }
+    }
+
     public void Play(Sound s, AudioSource a)
     {
         if (s == null)
